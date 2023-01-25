@@ -8,18 +8,20 @@ const Expenses = (props) => {
   const [filterDate, setFilterDate] = useState("2020");
 
   const getDate = (date) => {
-    setFilterDate(() => date);
-    console.log(filterDate);
+    setFilterDate(date);
   };
-
-  const expenses = props.expenses.map((x, i) => (
-    <ExpenseItem title={x.title} amount={x.amount} date={x.date} key={i} />
-  ));
 
   return (
     <Card className="expenses">
       <ExpensesFilter onDateChange={getDate} selectedDate={filterDate} />
-      {expenses}
+      {props.expenses.map((x) => (
+        <ExpenseItem
+          title={x.title}
+          amount={x.amount}
+          date={x.date}
+          key={x.id}
+        />
+      ))}
     </Card>
   );
 };
