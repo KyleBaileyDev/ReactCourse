@@ -6,6 +6,8 @@ const ExpenseForm = (props) => {
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
 
+  const [visibleForm, setVisibleForm] = useState(false);
+
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);
   };
@@ -32,9 +34,15 @@ const ExpenseForm = (props) => {
     setAmount("");
     setTitle("");
     setDate("");
+
+    setVisibleForm((oldState) => !oldState);
   };
 
-  return (
+  const changeForm = () => {
+    setVisibleForm((oldState) => !oldState);
+  };
+
+  return visibleForm ? (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
@@ -63,9 +71,14 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new_expense__actions">
+        <button type="button" onClick={changeForm}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
+  ) : (
+    <button onClick={changeForm}>Add New Expense</button>
   );
 };
 

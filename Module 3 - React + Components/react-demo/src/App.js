@@ -26,20 +26,15 @@ const INITIAL_EXPENSES = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(INITIAL_EXPENSES);
-  const [date, setDate] = useState(new Date("2021"));
 
   const addExpenseHanlder = (expense) => {
     setExpenses((oldState) => [expense, ...oldState]);
-    setDate(expense.date);
   };
 
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHanlder} />
-      <Expenses
-        expenses={expenses}
-        setDropdown={date.getFullYear().toString()}
-      />
+      <Expenses expenses={expenses} />
     </div>
   );
 };
